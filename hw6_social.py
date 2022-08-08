@@ -109,8 +109,30 @@ Parameters: dataframe ; dataframe
 Returns: None
 '''
 def addColumns(data, stateDf):
-    return
-
+    names=[]
+    positions=[]
+    states=[]
+    regions=[]
+    hashtags=[]
+    for index,row in data.iterrows():
+        l=row["label"]
+        t=row["text"]
+        name=parseName(l)
+        position=parsePosition(l)
+        state=parseState(l)
+        region=getRegionFromState(stateDf,state)
+        hashtag=findHashtags(t)
+        names.append(name)
+        positions.append(position)
+        states.append(state)
+        regions.append(region)
+        hashtags.append(hashtag)
+    data["name"]=names
+    data["position"]=positions
+    data["state"]=states
+    data["region"]=regions
+    data["hashtags"]=hashtags
+    return None
 
 ### PART 2 ###
 
