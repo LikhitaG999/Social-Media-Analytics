@@ -97,7 +97,9 @@ Parameters: dataframe ; str
 Returns: str
 '''
 def getRegionFromState(stateDf, state):
-    return
+    Region=stateDf.loc[stateDf['state']==state,"region"]
+#   df.loc[df['known column name'] == 'known value to match', 'column name to return']  
+    return Region.values[0]
 
 
 '''
