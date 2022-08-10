@@ -223,7 +223,15 @@ Parameters: dataframe
 Returns: dict mapping strs to ints
 '''
 def getHashtagRates(data):
-    return
+    hashtag_dictionary={}
+    for index,row in data.iterrows():
+        for hashtag in row["hashtags"]:
+            if hashtag in hashtag_dictionary:
+               hashtag_dictionary[hashtag]+=1
+            else:
+               hashtag_dictionary[hashtag]=1
+
+    return hashtag_dictionary
 
 
 '''
@@ -233,7 +241,14 @@ Parameters: dict mapping strs to ints ; int
 Returns: dict mapping strs to ints
 '''
 def mostCommonHashtags(hashtags, count):
-    return
+    hashtags_value={k:v for k,v in sorted(hashtags.items(),key=lambda v:v[1],reverse=True)}
+    tophashtags_dictionary={}
+    for i in hashtags_value:
+        if len(tophashtags_dictionary)<count:
+            tophashtags_dictionary[i]=hashtags_value[i]
+
+
+    return tophashtags_dictionary
 
 
 '''
