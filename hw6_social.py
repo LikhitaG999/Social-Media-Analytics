@@ -178,7 +178,22 @@ Parameters: dataframe ; str ; str
 Returns: dict mapping strs to ints
 '''
 def getDataCountByState(data, colName, dataToCount):
-    return
+    dict={}
+    for index,row in data.iterrows():
+        if len(colName)!=0 and len(dataToCount)!=0:
+            if row[colName]==dataToCount:
+                if row["state"] in dict:
+                    dict[row["state"]]+=1
+                else:
+                    dict[row["state"]]=1
+        else:
+            if  row["state"] in dict:
+                    dict[row["state"]]+=1
+            else:
+                dict[row["state"]]=1
+    
+    
+    return dict
 
 
 '''
@@ -188,7 +203,17 @@ Parameters: dataframe ; str
 Returns: dict mapping strs to (dicts mapping strs to ints)
 '''
 def getDataForRegion(data, colName):
-    return
+    outer_dictionary={}
+    for index,row in data.iterrows():
+        if row["region"] not in outer_dictionary:
+            outer_dictionary[row["region"]]={}
+        if row[colName] in outer_dictionary[row["region"]]:
+            outer_dictionary[row["region"]][row[colName]]+=1
+        else:
+            outer_dictionary[row["region"]][row[colName]]=1
+
+
+    return outer_dictionary
 
 
 '''
