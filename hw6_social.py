@@ -301,6 +301,27 @@ Parameters: dict mapping strs to ints ; dict mapping strs to ints ; int ; str
 Returns: None
 '''
 def graphTopNStates(stateCounts, stateFeatureCounts, n, title):
+    feature={}
+    for i in stateFeatureCounts:
+        feature[i]=(stateFeatureCounts[i]/stateCounts[i])
+    feature={k:v for k,v in sorted(feature.items(),key=lambda v:v[1],reverse=True)}
+    featuredict={}
+    for i in feature:
+        if n>len(featuredict):
+            featuredict[i]=feature[i]
+    xlabels=[]
+    valuelist=[]
+    for i in featuredict:
+        xlabels.append(i)
+        valuelist.append(featuredict[i])
+
+    plt.bar(xlabels,valuelist)
+    plt.xlabel("states")
+    plt.ylabel("count")
+    plt.title(title)
+    plt.xticks(ticks=list(range(len(xlabels))),labels=xlabels)
+    plt.tight_layout()
+    plt.show()
     return
 
 
