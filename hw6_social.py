@@ -25,7 +25,9 @@ Parameters: str
 Returns: dataframe
 '''
 def makeDataFrame(filename):
-    return
+    df=pd.read_csv(filename)
+    return df
+   
 
 
 '''
@@ -35,7 +37,10 @@ Parameters: str
 Returns: str
 '''
 def parseName(fromString):
-    return
+    start=fromString.find(":") + \
+    len(":")
+    end=fromString.find("(")
+    return fromString[start:end].strip()
 
 
 '''
@@ -45,7 +50,10 @@ Parameters: str
 Returns: str
 '''
 def parsePosition(fromString):
-    return
+    start=fromString.find("(")+\
+        len(":")
+    end=fromString.find("from")
+    return fromString[start:end].strip()
 
 
 '''
@@ -55,7 +63,12 @@ Parameters: str
 Returns: str
 '''
 def parseState(fromString):
-    return
+    start=fromString.find("from")+\
+        len("from")
+    end=fromString.find(")")
+    return fromString[start:end].strip()
+
+
 
 
 '''
